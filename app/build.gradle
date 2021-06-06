@@ -15,7 +15,6 @@ android {
         versionName "1.0"
 
 
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -57,9 +56,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
 
     implementation 'com.squareup.picasso:picasso:2.71828'
-
-
-
 
     // Material Design
     implementation 'com.google.android.material:material:1.4.0-rc01'
