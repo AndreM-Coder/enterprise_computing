@@ -22,7 +22,7 @@ class promotionsFragment : Fragment() {
 
         textViewNoPromotionsAvailable = view.findViewById(R.id.textViewNoPromotionsAvailable)
 
-        fetchJogos {
+        fetchProduts {
             if(it.size == 0) {
                 view.recyclerViewPromotions.adapter = PromotionsAdapter(it)
                 view.recyclerViewPromotions.layoutManager = LinearLayoutManager(activity)
@@ -37,7 +37,7 @@ class promotionsFragment : Fragment() {
         return view
     }
 
-    private fun fetchJogos(myCallback: (ArrayList<Product>) -> Unit) {
+    private fun fetchProduts(myCallback: (ArrayList<Product>) -> Unit) {
         val arrayProducts = ArrayList<Product>()
 
         FirebaseFirestore.getInstance().collection("products")
@@ -47,12 +47,11 @@ class promotionsFragment : Fragment() {
                     for(document in it.result!!) {
                         if (document.getString("promotion").toString() == "1"){
 
-                            //----------content comented for debug-------
-
-                            //val item = Product(document.data.getValue(("imageUrl")).toString(),
-                            //document.data.getValue(("name").toString()) as String,
-                            //document.getString(("price")) as String)
-                            //arrayProducts.add(item)
+                            val item = Product(document.data.getValue(("id")).toString().toInt(),
+                                document.data.getValue(("imageUrl")).toString(),
+                                document.data.getValue(("name").toString()) as String,
+                                document.getString(("price")) as String)
+                            arrayProducts.add(item)
 
                         }
                     }

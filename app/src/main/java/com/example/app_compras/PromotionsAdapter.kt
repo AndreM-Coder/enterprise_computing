@@ -1,10 +1,15 @@
 package com.example.app_compras
 
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -26,6 +31,21 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
             .into(holder.imageViewProduct)
         holder.textViewProductName.text = currentItem.textViewProductName
         holder.textViewProductPrice.text = currentItem.textViewProductPrice
+
+        holder.itemView.setOnClickListener {
+
+            val bundle = Bundle()
+            bundle.putString("produtoId", currentItem.id.toString())
+            val fragment = ProductFragment()
+            fragment.arguments = bundle
+
+            val manager: FragmentManager = (it.context as AppCompatActivity).supportFragmentManager
+            manager.beginTransaction()
+                .replace(R.id.fragment, fragment)
+                .addToBackStack(null)
+                .commit()
+
+        }
     }
 
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
