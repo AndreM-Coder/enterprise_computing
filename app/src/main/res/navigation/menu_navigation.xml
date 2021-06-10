@@ -32,13 +32,13 @@
         tools:layout="@layout/fragment_user" />
 
     <fragment
-        android:id="@+id/productFragment"
+        android:id="@+id/ProductFragment"
         android:name="com.example.app_compras.ProductFragment"
         android:label="fragment_product"
         tools:layout="@layout/fragment_product" />
 
     <action android:id="@+id/globalActionToproductFragment"
-        app:destination="@+id/productFragment" />
+        app:destination="@+id/ProductFragment" />
     <activity
         android:id="@+id/login"
         android:name="com.example.app_compras.Login"

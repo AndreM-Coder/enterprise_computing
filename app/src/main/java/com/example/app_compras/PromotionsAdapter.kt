@@ -1,5 +1,6 @@
 package com.example.app_compras
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +12,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -36,15 +36,21 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
             .into(holder.imageViewProduct)
         holder.textViewProductName.text = currentItem.textViewProductName
         holder.textViewProductPrice.text = currentItem.textViewProductPrice
-
+        holder.textViewProductPriceBefore.text = currentItem.textViewProductPriceBefore
+        holder.textViewProductPriceBefore.paintFlags = holder.textViewProductPriceBefore.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         holder.itemView.setOnClickListener { view->
+            val bundle = Bundle().apply {
+                putString("produtoId", currentItem.id.toString())
+            }
+            val fragment = ProductFragment()
+            fragment.arguments = bundle
 
-            val bundle = Bundle()
-            bundle.putString("produtoId", currentItem.id.toString())
-
-
-            view.findNavController().navigate(R.id.productFragment)
+            val manager: FragmentManager = (view.context as AppCompatActivity).supportFragmentManager
+            manager.beginTransaction()
+                .replace(R.id.fl_wrapper, fragment)
+                .addToBackStack(null)
+                .commit()
 
         }
     }
@@ -53,6 +59,7 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
         var imageViewProduct: ImageView = itemView.findViewById(R.id.imageViewProduct)
         val textViewProductName: TextView = itemView.findViewById(R.id.textViewProductName)
         val textViewProductPrice: TextView = itemView.findViewById(R.id.textViewProductPrice)
+        val textViewProductPriceBefore: TextView = itemView.findViewById(R.id.textViewProductPriceBefore)
     }
 
 }
