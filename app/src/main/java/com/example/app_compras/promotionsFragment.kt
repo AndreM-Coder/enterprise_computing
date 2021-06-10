@@ -35,6 +35,7 @@ class promotionsFragment : Fragment() {
         }
 
         return view
+
     }
 
     private fun fetchProduts(myCallback: (ArrayList<Product>) -> Unit) {
@@ -52,12 +53,16 @@ class promotionsFragment : Fragment() {
                                 document.data.getValue(("name").toString()) as String,
                                 document.getString(("price")) as String)
                             arrayProducts.add(item)
-
                         }
                     }
                     myCallback(arrayProducts)
                 }
             }
     }
+
+
+
+
+
 
 }

@@ -7,6 +7,25 @@
     tools:context=".Login">
 
     <EditText
+        android:id="@+id/emailLogin"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <EditText
         android:id="@+id/passwordLogin"
         android:layout_width="240dp"
         android:layout_height="50dp"
@@ -45,10 +64,9 @@
         android:text="Not a Member? Sign Up Here!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/submitLoginButton"
-        app:layout_constraintVertical_bias="0.964"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="UnknownId" />
 
     <TextView
@@ -60,26 +78,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToRegisterButton2"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.094" />
 
-    <EditText
-        android:id="@+id/emailLogin"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:autofillHints=""
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_email"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

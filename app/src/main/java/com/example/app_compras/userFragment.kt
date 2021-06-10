@@ -12,11 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [userFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class userFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -45,6 +40,7 @@ class userFragment : Fragment() {
         } else {
             // No user is signed in.
             return inflater.inflate(R.layout.activity_login, container, false)
+
         }
     }
 

@@ -10,10 +10,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.Adapter<PromotionsAdapter.ExampleViewHolder>() {
+
+    private lateinit var navController: NavController
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_row, parent, false)
@@ -32,18 +37,14 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
         holder.textViewProductName.text = currentItem.textViewProductName
         holder.textViewProductPrice.text = currentItem.textViewProductPrice
 
-        holder.itemView.setOnClickListener {
+
+        holder.itemView.setOnClickListener { view->
 
             val bundle = Bundle()
             bundle.putString("produtoId", currentItem.id.toString())
-            val fragment = ProductFragment()
-            fragment.arguments = bundle
 
-            val manager: FragmentManager = (it.context as AppCompatActivity).supportFragmentManager
-            manager.beginTransaction()
-                .replace(R.id.fragment, fragment)
-                .addToBackStack(null)
-                .commit()
+
+            view.findNavController().navigate(R.id.productFragment)
 
         }
     }

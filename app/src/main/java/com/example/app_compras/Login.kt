@@ -3,17 +3,23 @@ package com.example.app_compras
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.webkit.WebView
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_main.*
-
+import org.w3c.dom.Text
 
 
 class Login : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    lateinit var recuperar_password: TextView
+    lateinit var register : TextView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +27,14 @@ class Login : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        goToRegisterButton2.setOnClickListener {
+        recuperar_password = findViewById(R.id.btn_forgotPassword)
+        register = findViewById(R.id.goToRegisterButton2)
+
+        register.setOnClickListener {
 
             val intent = Intent(this,Register::class.java)
             startActivity(intent)
+            finish()
         }
 
         submitLoginButton.setOnClickListener {
@@ -38,9 +48,10 @@ class Login : AppCompatActivity() {
             }
         }
 
-        btn_forgotPassword.setOnClickListener {
+        recuperar_password.setOnClickListener {
             val intent = Intent(this, ResetPassword::class.java)
             startActivity(intent)
+            finish()
         }
 
         getSupportActionBar()?.setTitle("Login")
