@@ -24,6 +24,7 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_row, parent, false)
 
         return ExampleViewHolder(itemView)
+
     }
 
     override fun getItemCount(): Int = exampleList.size
@@ -39,21 +40,25 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
         holder.textViewProductPriceBefore.text = currentItem.textViewProductPriceBefore
         holder.textViewProductPriceBefore.paintFlags = holder.textViewProductPriceBefore.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
-        holder.itemView.setOnClickListener { view->
+        holder.itemView.setOnClickListener { view ->
             val bundle = Bundle().apply {
                 putString("produtoId", currentItem.id.toString())
             }
+
             val fragment = ProductFragment()
             fragment.arguments = bundle
 
-            val manager: FragmentManager = (view.context as AppCompatActivity).supportFragmentManager
+            val manager: FragmentManager =
+                (view.context as AppCompatActivity).supportFragmentManager
             manager.beginTransaction()
                 .replace(R.id.fl_wrapper, fragment)
                 .addToBackStack(null)
                 .commit()
 
         }
+
     }
+
 
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imageViewProduct: ImageView = itemView.findViewById(R.id.imageViewProduct)

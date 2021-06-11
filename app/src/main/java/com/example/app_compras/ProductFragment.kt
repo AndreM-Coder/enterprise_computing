@@ -8,17 +8,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.CallSuper
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 
 class ProductFragment : Fragment() {
+
 
     lateinit var textViewProductNameIndividual: TextView
     lateinit var textViewProductPriceIndividual: TextView
     lateinit var imageViewProductImageIndividual: ImageView
     lateinit var textViewProductDescriptionIndividual: TextView
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
 
         val view = inflater.inflate(R.layout.fragment_product, container, false)
 
@@ -26,6 +36,8 @@ class ProductFragment : Fragment() {
         textViewProductPriceIndividual = view.findViewById(R.id.textViewProductPriceIndividual)
         imageViewProductImageIndividual = view.findViewById(R.id.imageViewProductImageIndividual)
         textViewProductDescriptionIndividual = view.findViewById(R.id.textViewProductDescriptionIndividual)
+
+
 
 
         val bundle = this.arguments
