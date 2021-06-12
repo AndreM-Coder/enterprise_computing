@@ -31,7 +31,7 @@ class homeFragment : Fragment() {
                 textViewNoProductsAvailable.isVisible = true
             } else {
                 view.recyclerViewProducts.adapter = HomeAdapter(it)
-                view.recyclerViewProducts.layoutManager = LinearLayoutManager(activity)
+                view.recyclerViewProducts.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                 textViewNoProductsAvailable.isVisible = false
             }
         }
