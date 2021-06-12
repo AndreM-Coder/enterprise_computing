@@ -74,7 +74,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProducts"
-        android:layout_width="445dp"
+        android:layout_width="411dp"
         android:layout_height="360dp"
         android:layout_marginTop="395dp"
         android:scrollbars="horizontal"
