@@ -81,5 +81,4 @@
         android:orientation="horizontal"
         tools:listitem="@layout/recyclerview_row2" />
 
-
 </FrameLayout>
