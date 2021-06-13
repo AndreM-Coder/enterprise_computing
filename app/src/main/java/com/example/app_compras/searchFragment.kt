@@ -5,55 +5,142 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_search.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [searchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class searchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    lateinit var textViewNoProductsAvailable: TextView
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val view = inflater.inflate(R.layout.fragment_search, container, false)
+
+        textViewNoProductsAvailable = view.findViewById(R.id.textViewNoProductsAvailable)
+
+        fetchProduts1 {
+            if(it.size == 0) {
+                view.recyclerViewProductsFruits.adapter = SearchAdapter1(it)
+                view.recyclerViewProductsFruits.layoutManager = LinearLayoutManager(activity)
+                textViewNoProductsAvailable.isVisible = true
+            } else {
+                view.recyclerViewProductsFruits.adapter = SearchAdapter1(it)
+                view.recyclerViewProductsFruits.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                textViewNoProductsAvailable.isVisible = false
+            }
         }
+
+        fetchProduts2 {
+            if(it.size == 0) {
+                view.recyclerViewProductsDrinks.adapter = SearchAdapter1(it)
+                view.recyclerViewProductsDrinks.layoutManager = LinearLayoutManager(activity)
+                textViewNoProductsAvailable.isVisible = true
+            } else {
+                view.recyclerViewProductsDrinks.adapter = SearchAdapter1(it)
+                view.recyclerViewProductsDrinks.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                textViewNoProductsAvailable.isVisible = false
+            }
+        }
+
+        fetchProduts3 {
+            if(it.size == 0) {
+                view.recyclerViewProductsMassas.adapter = SearchAdapter1(it)
+                view.recyclerViewProductsMassas.layoutManager = LinearLayoutManager(activity)
+                textViewNoProductsAvailable.isVisible = true
+            } else {
+                view.recyclerViewProductsMassas.adapter = SearchAdapter1(it)
+                view.recyclerViewProductsMassas.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                textViewNoProductsAvailable.isVisible = false
+            }
+        }
+
+        return view
+
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
+    private fun fetchProduts1(myCallback: (ArrayList<Product>) -> Unit) {
+        val arrayProducts = ArrayList<Product>()
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment searchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            searchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        FirebaseFirestore.getInstance().collection("products")
+            .get()
+            .addOnCompleteListener {
+                if(it.isSuccessful) {
+                    for(document in it.result!!) {
+                        if (document.getString("category").toString() == "Frutas") {
+                            val item = Product(
+                                document.data.getValue(("id")).toString().toInt(),
+                                document.data.getValue(("imageUrl")).toString(),
+                                document.data.getValue(("name").toString()) as String,
+                                document.getString(("price")) as String,
+                                document.getString(("pricebefore")) as String,
+                                document.getString(("category")) as String
+                            )
+                            arrayProducts.add(item)
+
+                        }
+                    }
+                    myCallback(arrayProducts)
                 }
             }
     }
+
+    private fun fetchProduts2(myCallback: (ArrayList<Product>) -> Unit) {
+        val arrayProducts = ArrayList<Product>()
+
+        FirebaseFirestore.getInstance().collection("products")
+            .get()
+            .addOnCompleteListener {
+                if(it.isSuccessful) {
+                    for(document in it.result!!) {
+                        if (document.getString("category").toString() == "Bebidas") {
+                            val item = Product(
+                                document.data.getValue(("id")).toString().toInt(),
+                                document.data.getValue(("imageUrl")).toString(),
+                                document.data.getValue(("name").toString()) as String,
+                                document.getString(("price")) as String,
+                                document.getString(("pricebefore")) as String,
+                                document.getString(("category")) as String
+                            )
+                            arrayProducts.add(item)
+
+                        }
+                    }
+                    myCallback(arrayProducts)
+                }
+            }
+    }
+
+    private fun fetchProduts3(myCallback: (ArrayList<Product>) -> Unit) {
+        val arrayProducts = ArrayList<Product>()
+
+        FirebaseFirestore.getInstance().collection("products")
+            .get()
+            .addOnCompleteListener {
+                if(it.isSuccessful) {
+                    for(document in it.result!!) {
+                        if (document.getString("category").toString() == "Massas") {
+                            val item = Product(
+                                document.data.getValue(("id")).toString().toInt(),
+                                document.data.getValue(("imageUrl")).toString(),
+                                document.data.getValue(("name").toString()) as String,
+                                document.getString(("price")) as String,
+                                document.getString(("pricebefore")) as String,
+                                document.getString(("category")) as String
+                            )
+                            arrayProducts.add(item)
+
+                        }
+                    }
+                    myCallback(arrayProducts)
+                }
+            }
+    }
+
+
+
 }

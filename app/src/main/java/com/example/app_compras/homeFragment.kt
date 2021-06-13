@@ -48,16 +48,17 @@ class homeFragment : Fragment() {
             .addOnCompleteListener {
                 if(it.isSuccessful) {
                     for(document in it.result!!) {
-                        if (document.getString("promotion").toString() == "1") {
+
                             val item = Product(
                                 document.data.getValue(("id")).toString().toInt(),
                                 document.data.getValue(("imageUrl")).toString(),
                                 document.data.getValue(("name").toString()) as String,
                                 document.getString(("price")) as String,
-                                document.getString(("pricebefore")) as String
+                                document.getString(("pricebefore")) as String,
+                                document.getString(("category")) as String
                             )
                             arrayProducts.add(item)
-                        }
+
 
                     }
                     myCallback(arrayProducts)

@@ -51,7 +51,9 @@ class promotionsFragment : Fragment() {
                                 document.data.getValue(("imageUrl")).toString(),
                                 document.data.getValue(("name").toString()) as String,
                                 document.getString(("price")) as String,
-                                document.getString(("pricebefore")) as String)
+                                document.getString(("pricebefore")) as String,
+                                document.getString(("category")) as String
+                            )
                             arrayProducts.add(item)
                         }
                     }

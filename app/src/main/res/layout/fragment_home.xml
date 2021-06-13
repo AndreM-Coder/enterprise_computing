@@ -79,6 +79,6 @@
         android:layout_marginTop="395dp"
         android:scrollbars="horizontal"
         android:orientation="horizontal"
-        tools:listitem="@layout/recyclerview_row2" />
+        tools:listitem="@layout/recyclerview_row_categories_search" />
 
 </FrameLayout>
