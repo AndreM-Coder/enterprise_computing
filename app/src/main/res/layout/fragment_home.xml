@@ -80,5 +80,6 @@
         android:scrollbars="horizontal"
         android:orientation="horizontal"
         tools:listitem="@layout/recyclerview_row_categories_search" />
+    >
 
 </FrameLayout>
