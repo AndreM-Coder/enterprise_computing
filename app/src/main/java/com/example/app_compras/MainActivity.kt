@@ -14,7 +14,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
 
@@ -40,9 +39,6 @@ class MainActivity : AppCompatActivity() {
 
         //Setting the navigation controller to Bottom Nav
         bottomNavigationView.setupWithNavController(navController)
-
-
-
 
     }
 }

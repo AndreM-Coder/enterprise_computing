@@ -56,9 +56,7 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
                 .commit()
 
         }
-
     }
-
 
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imageViewProduct: ImageView = itemView.findViewById(R.id.imageViewProduct)

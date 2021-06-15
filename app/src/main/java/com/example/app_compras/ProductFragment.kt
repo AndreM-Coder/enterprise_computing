@@ -38,8 +38,6 @@ class ProductFragment : Fragment() {
         textViewProductDescriptionIndividual = view.findViewById(R.id.textViewProductDescriptionIndividual)
 
 
-
-
         val bundle = this.arguments
         if (bundle != null) {
             val produtoId = bundle.get("produtoId").toString()
