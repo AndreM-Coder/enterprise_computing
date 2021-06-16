@@ -49,7 +49,6 @@ class RegisterFragment : Fragment() {
                 if (password == repeatPassword) {
                     if(passwordRegister.length() >= 6) {
                         // Após registar vai para activity login
-                        // Log.e("Action", "Login text correct")
                         registerUser(email, password)
                     } else {
                         Toast.makeText(activity, "Password should be at Least 6 Characters Long!", Toast.LENGTH_LONG).show()
@@ -89,7 +88,6 @@ class RegisterFragment : Fragment() {
                     }
 
                 } else {
-                    //Log.e("Task Message", "Failed" + task.exception)
                     Toast.makeText(activity, "Failed"+ (task.exception?.message ?: "error" ), Toast.LENGTH_SHORT).show()
                 }
             }
