@@ -1,16 +1,16 @@
 package com.example.app_compras
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.squareup.picasso.Picasso
 
 class userFragment : Fragment() {
 
@@ -27,8 +27,7 @@ class userFragment : Fragment() {
 
     lateinit var firstname: TextView
     lateinit var lastname: TextView
-    lateinit var firstname2: TextView
-    lateinit var lastname2: TextView
+    lateinit var fullname: TextView
     lateinit var email: TextView
 
 
@@ -45,8 +44,7 @@ class userFragment : Fragment() {
 
         firstname = view.findViewById(R.id.firstname)
         lastname = view.findViewById(R.id.lastname)
-        firstname2 = view.findViewById(R.id.firstname2)
-        lastname2 = view.findViewById(R.id.lastname2)
+        fullname = view.findViewById(R.id.fullname)
         email = view.findViewById(R.id.email)
 
         val user = auth.currentUser
@@ -59,16 +57,25 @@ class userFragment : Fragment() {
                     if (task.isSuccessful){
                         firstname.text = task.result?.getString(("firstName")).toString()
                         lastname.text = task.result?.getString(("lastName")).toString()
-                        firstname2.text = task.result?.getString(("firstName")).toString()
-                        lastname2.text = task.result?.getString(("lastName")).toString()
                         email.text = task.result?.getString(("email")).toString()
-
+                        val first_name = task.result?.getString(("firstName")).toString()
+                        val spaceBetweenUs = " "
+                        val last_name = task.result?.getString(("lastName")).toString()
+                        fullname.text = first_name + spaceBetweenUs + last_name
                     }
                 }
 
         } else {
             // No user is signed in.
             mudarFragment(loginFragment)
+        }
+
+        firstname.setOnClickListener {
+            Toast.makeText(activity, "First Name Updated", Toast.LENGTH_LONG).show()
+        }
+
+        lastname.setOnClickListener {
+            Toast.makeText(activity, "Last Name Updated", Toast.LENGTH_LONG).show()
         }
 
         return view
@@ -81,6 +88,7 @@ class userFragment : Fragment() {
             .replace(R.id.fl_wrapper, fragment)
             .commit()
     }
+
 
 
 }

@@ -19,58 +19,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_weight="0.4"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:background="@drawable/bg_top">
-
-
-
-
-
-
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="00dp"
-            android:layout_marginTop="60dp"
-            android:src="@drawable/ic_user"/>
-
-        <TextView
-            android:id="@+id/firstname2"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:text="First"
-            android:textSize="31sp" />
-
-        <TextView
-            android:id="@+id/lastname2"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="-40dp"
-            android:layout_marginRight="-50dp"
-            android:text="Last"
-            android:textSize="31sp" />
-
-
-
-    </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/botaoAddCart"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_gravity="end"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_edit" />
+                android:layout_height="0dp"
+                android:layout_weight="0.4"
+                android:background="@drawable/bg_top"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="00dp"
+                    android:layout_marginTop="60dp"
+                    android:src="@drawable/ic_user" />
+
+                <TextView
+                    android:id="@+id/fullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textSize="31sp"/>
+
+
+            </LinearLayout>
+
 
 
             <LinearLayout
@@ -82,26 +56,25 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:background="#196F3D"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:src="@drawable/ic_user" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -110,13 +83,16 @@
                             android:textColor="#FFFFFF"
                             android:textSize="23sp" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/firstname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Teste"
                             android:textColor="#FFFFFF"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:drawableEnd="@drawable/ic_edit"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:imeOptions="actionDone"/>
 
 
 
@@ -150,13 +126,16 @@
                             android:textColor="#FFFFFF"
                             android:textSize="23sp" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/lastname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Teste"
                             android:textColor="#FFFFFF"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:drawableEnd="@drawable/ic_edit"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:imeOptions="actionDone"/>
 
 
 
@@ -195,7 +174,6 @@
                             android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="teste@gmail.com"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp" />
 
