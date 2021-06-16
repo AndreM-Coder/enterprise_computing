@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
@@ -13,6 +14,7 @@ class FragmentResetPassword : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     lateinit var loginFragment: LoginFragment
+    lateinit var login_button: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
@@ -20,6 +22,7 @@ class FragmentResetPassword : Fragment() {
 
         auth = FirebaseAuth.getInstance()
         loginFragment = LoginFragment()
+        login_button = view.findViewById(R.id.goToLoginButton)
 
 //        submitReset.setOnClickListener {
 //            if (resetEmail.text.trim().toString().isNotEmpty())
@@ -38,9 +41,9 @@ class FragmentResetPassword : Fragment() {
 //            }
 //        }
 //
-//        goToLoginButton3.setOnClickListener {
-//            mudarFragment(loginFragment)
-//        }
+      login_button.setOnClickListener {
+            mudarFragment(loginFragment)
+       }
 
         return view
     }

@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
@@ -18,6 +15,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     lateinit var recuperarPassword: TextView
     lateinit var registerFragment: RegisterFragment
+    lateinit var fragmentResetPassword: FragmentResetPassword
     lateinit var dontHaveAccount: TextView
     lateinit var submitLoginButton: TextView
     lateinit var emailLogin: EditText
@@ -28,6 +26,7 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.activity_login, container, false)
 
         registerFragment = RegisterFragment()
+        fragmentResetPassword = FragmentResetPassword()
         auth = FirebaseAuth.getInstance()
 
         recuperarPassword = view.findViewById(R.id.btn_forgotPassword)
@@ -56,7 +55,7 @@ class LoginFragment : Fragment() {
         }
 
         recuperarPassword.setOnClickListener {
-            //mudarFragment(FragmentResetPassword)
+            mudarFragment(fragmentResetPassword)
         }
 
         return view
