@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <EditText
-        android:id="@+id/rePasswordRegister"
+        android:id="@+id/registerFirstName"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_lock_open"
+        android:drawableStart="@drawable/ic_user"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Repeat Password"
-        android:inputType="textPassword"
+        android:hint="First Name"
+        android:inputType="textEmailAddress"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordRegister"
-        app:layout_constraintVertical_bias="0.096" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.138" />
+
+    <EditText
+        android:id="@+id/registerLasttName"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_user"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.255" />
 
     <EditText
         android:id="@+id/registerEmail"
@@ -38,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067" />
+        app:layout_constraintVertical_bias="0.371" />
 
     <EditText
         android:id="@+id/passwordRegister"
@@ -56,7 +76,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerEmail"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <Button
         android:id="@+id/submitRegisterButton"
@@ -68,7 +88,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rePasswordRegister"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -78,35 +98,67 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submitRegisterButton">
-
-        <TextView
-            android:id="@+id/textViewForgotYourPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="Already Have an account? "
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/goToLoginButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:clickable="true"
-            android:contextClickable="true"
-            android:ellipsize="end"
-            android:focusable="true"
-            android:singleLine="true"
-            android:text=" Login Here"
-            android:textColor="#FF0000"
-            android:textSize="16sp" />
+        app:layout_constraintTop_toBottomOf="@+id/submitRegisterButton"
+        app:layout_constraintVertical_bias="1.0">
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/rePasswordRegister"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_lock_open"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Repeat Password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordRegister"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <TextView
+        android:id="@+id/textViewForgotYourPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Already Have an account? "
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submitRegisterButton"
+        app:layout_constraintVertical_bias="0.233" />
+
+    <TextView
+        android:id="@+id/goToLoginButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:ellipsize="end"
+        android:focusable="true"
+        android:singleLine="true"
+        android:text=" Login Here"
+        android:textColor="#FF0000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewForgotYourPassword"
+        app:layout_constraintTop_toBottomOf="@+id/submitRegisterButton"
+        app:layout_constraintVertical_bias="0.233" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

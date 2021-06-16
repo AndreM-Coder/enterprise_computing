@@ -20,6 +20,8 @@ class RegisterFragment : Fragment() {
     lateinit var loginFragment: LoginFragment
     lateinit var goToLoginButton2: TextView
     lateinit var submitRegisterButton: Button
+    lateinit var registerFirstName: EditText
+    lateinit var registerLastName: EditText
     lateinit var registerEmail: EditText
     lateinit var passwordRegister: EditText
     lateinit var rePasswordRegister: EditText
@@ -28,6 +30,8 @@ class RegisterFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_register, container, false)
 
+        registerFirstName = view.findViewById(R.id.registerFirstName)
+        registerLastName = view.findViewById(R.id.registerLasttName)
         registerEmail = view.findViewById(R.id.registerEmail)
         passwordRegister = view.findViewById(R.id.passwordRegister)
         rePasswordRegister = view.findViewById(R.id.rePasswordRegister)
@@ -42,6 +46,8 @@ class RegisterFragment : Fragment() {
         submitRegisterButton = view.findViewById(R.id.submitRegisterButton)
         //funçao para validar inputs
         submitRegisterButton.setOnClickListener {
+            val firstName = registerFirstName.text.trim().toString()
+            val lastName = registerLastName.text.trim().toString()
             val email = registerEmail.text.trim().toString()
             val password = passwordRegister.text.trim().toString()
             val repeatPassword = rePasswordRegister.text.trim().toString()
@@ -49,7 +55,7 @@ class RegisterFragment : Fragment() {
                 if (password == repeatPassword) {
                     if(passwordRegister.length() >= 6) {
                         // Após registar vai para activity login
-                        registerUser(email, password)
+                        registerUser(email, password, firstName,lastName)
                     } else {
                         Toast.makeText(activity, "Password should be at Least 6 Characters Long!", Toast.LENGTH_LONG).show()
                     }
@@ -66,13 +72,15 @@ class RegisterFragment : Fragment() {
 
 
     // função para efetivar o registo
-    private fun registerUser(email: String, password: String) {
+    private fun registerUser(email: String, password: String, firstName: String, lastName: String) {
         activity?.let { it ->
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(it) { task ->
                 if (task.isSuccessful) {
 
                     val user = HashMap<String, Any>()
                     user["email"] = email
+                    user["firstName"] = firstName
+                    user["lastName"] = lastName
                     val userRef = authFireStore
                     val uid = mAuth.uid.toString()
                     userRef.document(uid).set(user).addOnCompleteListener { it1 ->
