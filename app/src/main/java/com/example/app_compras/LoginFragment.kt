@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.activity_login, container, false)
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
 
         registerFragment = RegisterFragment()
         fragmentResetPassword = FragmentResetPassword()
@@ -36,8 +36,6 @@ class LoginFragment : Fragment() {
         passwordLogin = view.findViewById(R.id.passwordLogin)
 
         dontHaveAccount.setOnClickListener {
-            Toast.makeText(activity, "Please!", Toast.LENGTH_LONG).show()
-            Log.d("dasdasdas", "CHGEUIE")
             mudarFragment(registerFragment)
         }
 
@@ -45,9 +43,6 @@ class LoginFragment : Fragment() {
             val email = emailLogin.text.trim().toString()
             val pass = passwordLogin.text.trim().toString()
             if (email.isNotEmpty() && pass.isNotEmpty()) {
-                // Log.e("Action", "Login text correct")
-                //Toast.makeText(this, "Sucesso", Toast.LENGTH_LONG).show()
-
                 loginUser(email, pass)
             } else {
                 Toast.makeText(activity, "Please! Fill the Form Correctly", Toast.LENGTH_LONG).show()
@@ -68,13 +63,11 @@ class LoginFragment : Fragment() {
             { task ->
                 if(task.isSuccessful) {
                     //if login feito com sucesso vai para user dashboard
-                    //Log.e("Task Message", "Success");
                     val intent = Intent(activity, MainActivity::class.java)
                     startActivity(intent)
-                    Toast.makeText(activity, "Success!!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "Logged In Successfull", Toast.LENGTH_LONG).show()
                 } else {
                     //else (login tem erro)
-                    //Log.e( "Task Message", "Failed"+task.exception.getMessage());
                     Toast.makeText(activity, "The Inserted Data does Not Match our Records",Toast.LENGTH_LONG).show()
                 }
             }

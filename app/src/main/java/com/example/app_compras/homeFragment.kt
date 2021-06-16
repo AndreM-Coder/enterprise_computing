@@ -59,7 +59,6 @@ class homeFragment : Fragment() {
                             )
                             arrayProducts.add(item)
 
-
                     }
                     myCallback(arrayProducts)
                 }
