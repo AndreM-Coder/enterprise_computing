@@ -24,7 +24,6 @@ class UserAdapter (private val exampleList: List<User>) : RecyclerView.Adapter<U
         holder.textViewUserFirstName.text = currentItem.firstName
         holder.textViewUserLastName.text = currentItem.lastName
         holder.textViewUserEmail.text = currentItem.email
-
     }
 
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
