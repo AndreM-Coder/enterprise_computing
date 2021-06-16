@@ -3,6 +3,7 @@ package com.example.app_compras
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -17,8 +18,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
 
-    lateinit var recuperar_password: TextView
-    lateinit var register : TextView
+    lateinit var homeFragment: homeFragment
+    lateinit var promotionsFragment: promotionsFragment
+    lateinit var searchFragment: searchFragment
+    lateinit var cartFragment: cartFragment
+    lateinit var userFragment: userFragment
+
 
     private lateinit var navController: NavController
 
@@ -31,14 +36,44 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupNavigation(bottomNavigationView)
 
-        val bottomNavigationView= findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
+    }
 
-        navController = Navigation.findNavController(this, R.id.fragment)
+    private fun setupNavigation(bottomNavigationView: BottomNavigationView) {
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeFragment -> {
+                    homeFragment = homeFragment()
+                    mudarFragment(homeFragment)
+                }
+                R.id.promotionsFragment -> {
+                    promotionsFragment = promotionsFragment()
+                    mudarFragment(promotionsFragment)
+                }
+                R.id.searchFragment -> {
+                    searchFragment = searchFragment()
+                    mudarFragment(searchFragment)
+                }
+                R.id.cartFragment -> {
+                    cartFragment = cartFragment()
+                    mudarFragment(cartFragment)
+                }
+                R.id.userFragment -> {
+                    userFragment = userFragment()
+                    mudarFragment(userFragment)
+                }
 
-        //Setting the navigation controller to Bottom Nav
-        bottomNavigationView.setupWithNavController(navController)
+            }
+            true
+        }
+    }
 
+    private fun mudarFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fl_wrapper, fragment)
+            .commit()
     }
 }

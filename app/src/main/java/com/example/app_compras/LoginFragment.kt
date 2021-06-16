@@ -14,10 +14,10 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
+
     private lateinit var auth: FirebaseAuth
     lateinit var recuperarPassword: TextView
     lateinit var registerFragment: RegisterFragment
-    lateinit var homeFragment: homeFragment
     lateinit var dontHaveAccount: TextView
     lateinit var submitLoginButton: TextView
     lateinit var emailLogin: EditText
@@ -25,10 +25,9 @@ class LoginFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        val view = inflater.inflate(R.layout.activity_login, container, false)
 
         registerFragment = RegisterFragment()
-        homeFragment = homeFragment()
         auth = FirebaseAuth.getInstance()
 
         recuperarPassword = view.findViewById(R.id.btn_forgotPassword)
@@ -38,6 +37,8 @@ class LoginFragment : Fragment() {
         passwordLogin = view.findViewById(R.id.passwordLogin)
 
         dontHaveAccount.setOnClickListener {
+            Toast.makeText(activity, "Please!", Toast.LENGTH_LONG).show()
+            Log.d("dasdasdas", "CHGEUIE")
             mudarFragment(registerFragment)
         }
 
@@ -45,15 +46,17 @@ class LoginFragment : Fragment() {
             val email = emailLogin.text.trim().toString()
             val pass = passwordLogin.text.trim().toString()
             if (email.isNotEmpty() && pass.isNotEmpty()) {
+                // Log.e("Action", "Login text correct")
+                //Toast.makeText(this, "Sucesso", Toast.LENGTH_LONG).show()
+
                 loginUser(email, pass)
             } else {
-                Toast.makeText(activity, "Check if All The Fields Are Filled!", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Please! Fill the Form Correctly", Toast.LENGTH_LONG).show()
             }
         }
 
         recuperarPassword.setOnClickListener {
-//            mudarFragment()
-            Toast.makeText(activity, "Unavailable right now", Toast.LENGTH_LONG).show()
+            //mudarFragment(FragmentResetPassword)
         }
 
         return view
@@ -62,12 +65,14 @@ class LoginFragment : Fragment() {
 
     private fun loginUser(email: String, password: String){
         activity?.let {
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(it) { task ->
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(it)
+            { task ->
                 if(task.isSuccessful) {
                     //if login feito com sucesso vai para user dashboard
                     //Log.e("Task Message", "Success");
-                    mudarFragment(homeFragment)
-                    Toast.makeText(activity, "Logged in sucessfull", Toast.LENGTH_LONG).show()
+                    val intent = Intent(activity, MainActivity::class.java)
+                    startActivity(intent)
+                    Toast.makeText(activity, "Success!!", Toast.LENGTH_LONG).show()
                 } else {
                     //else (login tem erro)
                     //Log.e( "Task Message", "Failed"+task.exception.getMessage());
