@@ -70,17 +70,43 @@
         app:layout_constraintTop_toBottomOf="@+id/rePasswordRegister"
         app:layout_constraintVertical_bias="0.145" />
 
-    <TextView
-        android:id="@+id/goToLoginButton2"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already Have an account? Login Here"
+        android:layout_marginBottom="200dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submitRegisterButton"
-        app:layout_constraintVertical_bias="0.198" />
+        app:layout_constraintTop_toBottomOf="@+id/submitRegisterButton">
+
+        <TextView
+            android:id="@+id/textViewForgotYourPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Already Have an account? "
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/goToLoginButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:clickable="true"
+            android:contextClickable="true"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:singleLine="true"
+            android:text=" Login Here"
+            android:textColor="#FF0000"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

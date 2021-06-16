@@ -15,9 +15,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterFragment : Fragment() {
 
-    private lateinit var auth: FirebaseAuth
-    val mAuth = FirebaseAuth.getInstance()
-    val Auth = FirebaseFirestore.getInstance().collection("Users")
+    private val mAuth = FirebaseAuth.getInstance()
+    private val authFireStore = FirebaseFirestore.getInstance().collection("Users")
     lateinit var loginFragment: LoginFragment
     lateinit var goToLoginButton2: TextView
     lateinit var submitRegisterButton: Button
@@ -33,7 +32,6 @@ class RegisterFragment : Fragment() {
         passwordRegister = view.findViewById(R.id.passwordRegister)
         rePasswordRegister = view.findViewById(R.id.rePasswordRegister)
         loginFragment = LoginFragment()
-        auth = FirebaseAuth.getInstance()
         goToLoginButton2 = view.findViewById(R.id.goToLoginButton2)
 
         //mudar a view
@@ -52,11 +50,7 @@ class RegisterFragment : Fragment() {
                     if(passwordRegister.length() >= 6) {
                         // Após registar vai para activity login
                         // Log.e("Action", "Login text correct")
-                        Log.d("DASDASDA", email)
-                        Log.d("DASDASDA", password)
-                        Log.d("DASDASDA", repeatPassword)
-                        //Toast.makeText(this, "Sucesso", Toast.LENGTH_LONG).show()
-//                        registerUser(email, password)
+                        registerUser(email, password)
                     } else {
                         Toast.makeText(activity, "Password should be at Least 6 Characters Long!", Toast.LENGTH_LONG).show()
                     }
@@ -74,17 +68,17 @@ class RegisterFragment : Fragment() {
 
     // função para efetivar o registo
     private fun registerUser(email: String, password: String) {
-        activity?.let {
-            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(it) { task ->
+        activity?.let { it ->
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(it) { task ->
                 if (task.isSuccessful) {
 
                     val user = HashMap<String, Any>()
                     user["email"] = email
-                    val userRef = Auth
+                    val userRef = authFireStore
                     val uid = mAuth.uid.toString()
-                    userRef.document(uid).set(user).addOnCompleteListener {
+                    userRef.document(uid).set(user).addOnCompleteListener { it1 ->
                         when {
-                            it.isSuccessful -> {Toast.makeText(activity,"Sign Up Successful",Toast.LENGTH_SHORT).show()
+                            it1.isSuccessful -> {Toast.makeText(activity,"Sign Up Successful",Toast.LENGTH_SHORT).show()
                                 mAuth.signOut()
                                 mudarFragment(loginFragment)
                             }
@@ -94,9 +88,6 @@ class RegisterFragment : Fragment() {
                         }
                     }
 
-
-                    Toast.makeText(activity, "Sign Up Successfully", Toast.LENGTH_LONG).show()
-                    //Log.e("Task Message", "Registo Feito com Sucesso")
                 } else {
                     //Log.e("Task Message", "Failed" + task.exception)
                     Toast.makeText(activity, "Failed"+ (task.exception?.message ?: "error" ), Toast.LENGTH_SHORT).show()

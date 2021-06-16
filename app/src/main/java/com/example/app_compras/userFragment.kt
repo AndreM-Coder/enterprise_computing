@@ -19,21 +19,37 @@ class userFragment : Fragment() {
     lateinit var submitLoginButton: TextView
     lateinit var emailLogin: EditText
     lateinit var passwordLogin: EditText
+    lateinit var loginFragment: LoginFragment
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+
+        val view = inflater.inflate(R.layout.fragment_user, container, false)
+
         //check if user is authenticated
         auth = FirebaseAuth.getInstance()
-        var user = auth.currentUser
-        return if (user != null) {
+
+        loginFragment = LoginFragment()
+        registerFragment = RegisterFragment()
+
+        val user = auth.currentUser
+        if (user != null) {
             //return that user is currently logged
-            inflater.inflate(R.layout.fragment_user, container, false)
+            mudarFragment(registerFragment)
         } else {
             // No user is signed in.
-            inflater.inflate(R.layout.activity_login, container, false)
-
+            mudarFragment(loginFragment)
         }
 
+        return view
+
+    }
+
+    private fun mudarFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fl_wrapper, fragment)
+            .commit()
     }
 
 
