@@ -25,7 +25,7 @@ class ProductAdapter (private val exampleList: List<ProductIndividual>) : Recycl
             .load(currentItem.imageViewProduct)
             .into(holder.imageViewProductImageIndividual)
         holder.textViewProductNameIndividual.text = currentItem.textViewProductName
-        holder.textViewProductPriceIndividual.text = currentItem.textViewProductPrice
+        holder.textViewProductPriceIndividual.text = (currentItem.textViewProductPrice + "€")
         holder.textViewProductDescriptionIndividual.text = currentItem.textviewDescription
 
     }

@@ -17,13 +17,47 @@
         app:layout_constraintVertical_bias="0.114"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="35dp"
         android:layout_marginTop="45dp"
         android:fontFamily="sans-serif"
         android:text="Cart"
         android:textColor="#FFFFFF"
         android:textSize="36sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="75dp"
+        tools:listitem="@layout/recyclerview_row_cart" />
+
+    <TextView
+        android:id="@+id/textViewNoProductsInCartAvailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No Products In Cart"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:textSize="30sp"/>
+
+    <Button
+        android:id="@+id/buttonClearCart"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="10dp"
+        android:text="Clear Cart" />
+
+    <Button
+        android:id="@+id/buttonCheckout"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:text="Checkout" />
 
 </FrameLayout>

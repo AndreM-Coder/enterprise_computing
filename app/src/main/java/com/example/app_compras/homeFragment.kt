@@ -55,8 +55,11 @@ class homeFragment : Fragment() {
                                 document.data.getValue(("name").toString()) as String,
                                 document.getString(("price")) as String,
                                 document.getString(("pricebefore")) as String,
-                                document.getString(("category")) as String
-                            )
+                                document.getString(("category")) as String,
+                                document.getString(("stock")) as String,
+                                document.getString(("quantidade")) as String,
+                                document.getString(("promotion")) as String,
+                                document.getString(("description")) as String)
                             arrayProducts.add(item)
 
                     }

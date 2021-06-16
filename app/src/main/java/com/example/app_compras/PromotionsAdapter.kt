@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
@@ -21,9 +18,8 @@ import com.squareup.picasso.Picasso
 
 class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.Adapter<PromotionsAdapter.ExampleViewHolder>() {
 
-    private lateinit var navController: NavController
     private val mAuth = FirebaseAuth.getInstance()
-    private val authFireStore = FirebaseFirestore.getInstance().collection("Carrinho")
+    private val authFireStore = FirebaseFirestore.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_row, parent, false)
@@ -41,8 +37,8 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
             .load(currentItem.imageViewProduct)
             .into(holder.imageViewProduct)
         holder.textViewProductName.text = currentItem.textViewProductName
-        holder.textViewProductPrice.text = currentItem.textViewProductPrice
-        holder.textViewProductPriceBefore.text = currentItem.textViewProductPriceBefore
+        holder.textViewProductPrice.text = (currentItem.textViewProductPrice + "€")
+        holder.textViewProductPriceBefore.text = (currentItem.textViewProductPriceBefore + "€")
         holder.textViewProductPriceBefore.paintFlags = holder.textViewProductPriceBefore.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         holder.itemView.setOnClickListener { view ->
@@ -63,7 +59,29 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
         }
 
         holder.buttonCart.setOnClickListener {
-            Log.d("aaaa", "carregaste no carrinho")
+            val carrinho = HashMap<String, Any>()
+            carrinho["category"] = currentItem.categoryProduct
+            carrinho["description"] = currentItem.descriptionProduct
+            carrinho["id"] = currentItem.id
+            carrinho["imageUrl"] = currentItem.imageViewProduct
+            carrinho["name"] = currentItem.textViewProductName
+            carrinho["price"] = currentItem.textViewProductPrice
+            carrinho["pricebefore"] = currentItem.textViewProductPriceBefore
+            carrinho["promotion"] = currentItem.promotion
+            carrinho["quantidade"] = currentItem.quantidade
+            carrinho["stock"] = currentItem.stock
+
+            val uid = mAuth.uid.toString()
+            authFireStore.collection(uid).document(currentItem.textViewProductName).set(carrinho).addOnCompleteListener { it1 ->
+                when {
+                    it1.isSuccessful -> {
+                        Log.d("aaaa", "adicionado")
+                    }
+                    else -> {
+                        Log.d("aaaa", "não adicionou")
+                    }
+                }
+            }
         }
     }
 
@@ -72,23 +90,7 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
         val textViewProductName: TextView = itemView.findViewById(R.id.textViewProductName)
         val textViewProductPrice: TextView = itemView.findViewById(R.id.textViewProductPrice)
         val textViewProductPriceBefore: TextView = itemView.findViewById(R.id.textViewProductPriceBefore)
-        val buttonCart: Button = itemView.findViewById(R.id.buttonCart)
-    }
-
-    private fun addCart(produtoId: String) {
-        val produto = HashMap<String, Any>()
-        produto["id"] = produtoId
-        val uid = mAuth.uid.toString()
-        authFireStore.document(uid).set(produto).addOnCompleteListener { it1 ->
-            when {
-                it1.isSuccessful -> {
-                    Log.d("aaaa", "adicionado")
-                }
-                else -> {
-                    Log.d("aaaa", "não adicionou")
-                }
-            }
-        }
+        val buttonCart: ImageButton = itemView.findViewById(R.id.buttonCart)
     }
 
 }
