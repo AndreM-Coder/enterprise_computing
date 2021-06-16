@@ -107,7 +107,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="First Name"
-
                             android:textColor="#FFFFFF"
                             android:textSize="23sp" />
 
@@ -118,6 +117,8 @@
                             android:text="Teste"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp" />
+
+
 
                     </LinearLayout>
 
@@ -156,6 +157,8 @@
                             android:text="Teste"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp" />
+
+
 
                     </LinearLayout>
 
