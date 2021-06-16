@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 
 class userFragment : Fragment() {
 
@@ -21,6 +23,14 @@ class userFragment : Fragment() {
     lateinit var passwordLogin: EditText
     lateinit var loginFragment: LoginFragment
 
+    lateinit var currentid : String
+
+    lateinit var firstname: TextView
+    lateinit var lastname: TextView
+    lateinit var firstname2: TextView
+    lateinit var lastname2: TextView
+    lateinit var email: TextView
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
@@ -29,13 +39,33 @@ class userFragment : Fragment() {
         //check if user is authenticated
         auth = FirebaseAuth.getInstance()
 
+
         loginFragment = LoginFragment()
         registerFragment = RegisterFragment()
 
+        firstname = view.findViewById(R.id.firstname)
+        lastname = view.findViewById(R.id.lastname)
+        firstname2 = view.findViewById(R.id.firstname2)
+        lastname2 = view.findViewById(R.id.lastname2)
+        email = view.findViewById(R.id.email)
+
         val user = auth.currentUser
+
         if (user != null) {
-            //return that user is currently logged
-            mudarFragment(registerFragment)
+            currentid = user.uid
+            FirebaseFirestore.getInstance().collection("Users").document(currentid)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        firstname.text = task.result?.getString(("firstName")).toString()
+                        lastname.text = task.result?.getString(("lastName")).toString()
+                        firstname2.text = task.result?.getString(("firstName")).toString()
+                        lastname2.text = task.result?.getString(("lastName")).toString()
+                        email.text = task.result?.getString(("email")).toString()
+
+                    }
+                }
+
         } else {
             // No user is signed in.
             mudarFragment(loginFragment)
