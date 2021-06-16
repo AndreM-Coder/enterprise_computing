@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,12 +16,14 @@ import kotlinx.android.synthetic.main.fragment_promotions.view.*
 class promotionsFragment : Fragment() {
 
     lateinit var textViewNoPromotionsAvailable: TextView
+    lateinit var buttonCart: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_promotions, container, false)
 
         textViewNoPromotionsAvailable = view.findViewById(R.id.textViewNoPromotionsAvailable)
+        buttonCart = view.findViewById(R.id.buttonCart)
 
         fetchProduts {
             if(it.size == 0) {
@@ -33,6 +36,11 @@ class promotionsFragment : Fragment() {
                 textViewNoPromotionsAvailable.isVisible = false
             }
         }
+
+        buttonCart.setOnClickListener {
+
+        }
+
 
         return view
 

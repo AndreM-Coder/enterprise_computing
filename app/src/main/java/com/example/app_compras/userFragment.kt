@@ -35,6 +35,7 @@ class userFragment : Fragment() {
         val user = auth.currentUser
         if (user != null) {
             //return that user is currently logged
+            mudarFragment(registerFragment)
         } else {
             // No user is signed in.
             mudarFragment(loginFragment)
