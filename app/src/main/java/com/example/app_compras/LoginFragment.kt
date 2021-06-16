@@ -56,7 +56,7 @@ class LoginFragment : Fragment() {
         }
 
         recuperarPassword.setOnClickListener {
-//            mudarFragment()
+            //mudarFragment(FragmentResetPassword)
         }
 
         return view
