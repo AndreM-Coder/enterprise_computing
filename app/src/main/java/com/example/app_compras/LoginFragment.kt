@@ -16,9 +16,9 @@ import com.google.firebase.auth.FirebaseAuth
 class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
-    lateinit var recuperarPassword: Button
+    lateinit var recuperarPassword: TextView
     lateinit var registerFragment: RegisterFragment
-    lateinit var dontHaveAccount: Button
+    lateinit var dontHaveAccount: TextView
     lateinit var submitLoginButton: TextView
     lateinit var emailLogin: EditText
     lateinit var passwordLogin: EditText
