@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.CallSuper
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -18,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_promotions.view.*
 
 class ProductFragment : Fragment() {
 
@@ -27,6 +29,7 @@ class ProductFragment : Fragment() {
     lateinit var imageViewProductImageIndividual: ImageView
     lateinit var textViewProductDescriptionIndividual: TextView
     lateinit var textViewProductPriceBefore : TextView
+    lateinit var pricebefore: ImageView
 
 
 
@@ -40,12 +43,12 @@ class ProductFragment : Fragment() {
         imageViewProductImageIndividual = view.findViewById(R.id.imageViewProductImageIndividual)
         textViewProductDescriptionIndividual = view.findViewById(R.id.textViewProductDescriptionIndividual)
         textViewProductPriceBefore = view.findViewById(R.id.textViewProductPriceBefore)
-
-        textViewProductPriceBefore.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        pricebefore= view.findViewById(R.id.pricebefore)
 
 
         val bundle = this.arguments
         if (bundle != null) {
+
             val produtoId = bundle.get("produtoId").toString()
             carregarProduto(produtoId)
         }
@@ -69,9 +72,10 @@ class ProductFragment : Fragment() {
                             .load(it.getString(("imageUrl")))
                             .into(imageViewProductImageIndividual)
                         textViewProductDescriptionIndividual.text = it.getString(("description"))
-                        textViewProductPriceBefore.text = it.getString(("pricebefore")).toString()
+                        textViewProductPriceBefore.text = it.getString(("pricebefore"))
                     }
                     if(it.getString("promotion").toString() == "0"){
+                        pricebefore.isVisible = false
                         textViewProductNameIndividual.text = it.getString(("name")).toString()
                         textViewProductPriceIndividual.text = (it.getString(("price")) + "€")
                         Picasso.get()

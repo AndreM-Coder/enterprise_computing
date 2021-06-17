@@ -7,7 +7,6 @@
     android:background="#088A4B"
     tools:context=".ProductFragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="460dp"
@@ -19,6 +18,7 @@
         android:orientation="horizontal"
         android:paddingStart="20dp"
         android:paddingEnd="20dp">
+
 
 
         <ImageView
@@ -76,8 +76,16 @@
             android:textAlignment="center"
             android:textSize="16sp" />
 
-
-
+        <ImageView
+            android:id="@+id/pricebefore"
+            android:layout_width="48dp"
+            android:layout_height="0.6dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="-77dp"
+            android:layout_marginTop="267dp"
+            android:layout_centerHorizontal="true"
+            android:background="#757575"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
 
