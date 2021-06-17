@@ -41,7 +41,6 @@ class ProductFragment : Fragment() {
         textViewProductDescriptionIndividual = view.findViewById(R.id.textViewProductDescriptionIndividual)
         textViewProductPriceBefore = view.findViewById(R.id.textViewProductPriceBefore)
 
-        textViewProductPriceBefore.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         val bundle = this.arguments
         if (bundle != null) {
