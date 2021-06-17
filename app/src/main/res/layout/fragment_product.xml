@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="-185dp"
+            android:layout_marginStart="-175dp"
             android:layout_marginBottom="-60dp"
             android:text="2,40€"
             android:textSize="20sp"
@@ -59,9 +59,9 @@
             android:layout_width="230dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginStart="-130dp"
+            android:layout_marginStart="-140dp"
             android:layout_marginTop="100dp"
-            android:layout_marginBottom="-40dp"
+            android:layout_marginBottom="-45dp"
             android:text="Descrição"
             android:textAlignment="center"
             android:textSize="16sp" />
@@ -72,6 +72,7 @@
             android:layout_height="35dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginStart="-10dp"
             android:background="#A0A2A3"
             android:contentDescription="cartIcon"
             android:src="@drawable/ic_cart_add" />
