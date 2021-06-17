@@ -50,6 +50,7 @@ class ProductFragment : Fragment() {
         if (bundle != null) {
 
             val produtoId = bundle.get("produtoId").toString()
+            pricebefore.isVisible = false
             carregarProduto(produtoId)
         }
 
@@ -66,6 +67,7 @@ class ProductFragment : Fragment() {
             .addOnSuccessListener {
                 if (it != null) {
                     if (it.getString("promotion").toString() == "1") {
+                        pricebefore.isVisible = true
                         textViewProductNameIndividual.text = it.getString(("name")).toString()
                         textViewProductPriceIndividual.text = (it.getString(("price")) + "€")
                         Picasso.get()
@@ -75,7 +77,6 @@ class ProductFragment : Fragment() {
                         textViewProductPriceBefore.text = it.getString(("pricebefore"))
                     }
                     if(it.getString("promotion").toString() == "0"){
-                        pricebefore.isVisible = false
                         textViewProductNameIndividual.text = it.getString(("name")).toString()
                         textViewProductPriceIndividual.text = (it.getString(("price")) + "€")
                         Picasso.get()
