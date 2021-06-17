@@ -1,5 +1,6 @@
 package com.example.app_compras
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -25,18 +26,22 @@ class ProductFragment : Fragment() {
     lateinit var textViewProductPriceIndividual: TextView
     lateinit var imageViewProductImageIndividual: ImageView
     lateinit var textViewProductDescriptionIndividual: TextView
+    lateinit var textViewProductPriceBefore : TextView
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
 
-        val view = inflater.inflate(R.layout.fragment_product, container, false)
+        val view = inflater.inflate(R.layout.fragment_product_promotion, container, false)
 
         textViewProductNameIndividual = view.findViewById(R.id.textViewProductNameIndividual)
         textViewProductPriceIndividual = view.findViewById(R.id.textViewProductPriceIndividual)
         imageViewProductImageIndividual = view.findViewById(R.id.imageViewProductImageIndividual)
         textViewProductDescriptionIndividual = view.findViewById(R.id.textViewProductDescriptionIndividual)
+        textViewProductPriceBefore = view.findViewById(R.id.textViewProductPriceBefore)
 
+        textViewProductPriceBefore.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         val bundle = this.arguments
         if (bundle != null) {
@@ -55,13 +60,24 @@ class ProductFragment : Fragment() {
         FirebaseFirestore.getInstance().collection("products").document(produto)
             .get()
             .addOnSuccessListener {
-                if(it != null) {
-                    textViewProductNameIndividual.text = it.getString(("name")).toString()
-                    textViewProductPriceIndividual.text = (it.getString(("price")) + "€")
-                    Picasso.get()
-                        .load(it.getString(("imageUrl")))
-                        .into(imageViewProductImageIndividual)
-                    textViewProductDescriptionIndividual.text = it.getString(("description"))
+                if (it != null) {
+                    if (it.getString("promotion").toString() == "1") {
+                        textViewProductNameIndividual.text = it.getString(("name")).toString()
+                        textViewProductPriceIndividual.text = (it.getString(("price")) + "€")
+                        Picasso.get()
+                            .load(it.getString(("imageUrl")))
+                            .into(imageViewProductImageIndividual)
+                        textViewProductDescriptionIndividual.text = it.getString(("description"))
+                        textViewProductPriceBefore.text = it.getString(("pricebefore")).toString()
+                    }
+                    if(it.getString("promotion").toString() == "0"){
+                        textViewProductNameIndividual.text = it.getString(("name")).toString()
+                        textViewProductPriceIndividual.text = (it.getString(("price")) + "€")
+                        Picasso.get()
+                            .load(it.getString(("imageUrl")))
+                            .into(imageViewProductImageIndividual)
+                        textViewProductDescriptionIndividual.text = it.getString(("description"))
+                    }
                 }
             }
     }

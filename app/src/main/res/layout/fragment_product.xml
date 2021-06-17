@@ -23,11 +23,11 @@
 
         <ImageView
             android:id="@+id/imageViewProductImageIndividual"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginBottom="100dp"
-            android:layout_marginStart="59dp"
+            android:layout_marginStart="65dp"
             android:textAlignment="center" />
 
         <TextView
@@ -35,11 +35,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="-240dp"
+            android:layout_marginStart="-220dp"
             android:layout_marginBottom="-20dp"
             android:text="Bananas"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
 
@@ -48,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="-175dp"
-            android:layout_marginBottom="-60dp"
+            android:layout_marginStart="-173dp"
+            android:layout_marginBottom="-65dp"
             android:text="2,40€"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -72,7 +72,7 @@
             android:layout_height="35dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="-10dp"
+            android:layout_marginStart="-20dp"
             android:background="#A0A2A3"
             android:contentDescription="cartIcon"
             android:src="@drawable/ic_cart_add" />
