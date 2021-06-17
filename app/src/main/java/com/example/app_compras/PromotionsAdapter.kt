@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 
@@ -65,57 +66,59 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
             FirebaseFirestore.getInstance().collection(uid).document(currentItem.textViewProductName)
                 .get()
                 .addOnCompleteListener {
-                    //se ja existir este produto no carrinho
-                    val carrinho = HashMap<String, Any>()
-                    carrinho["category"] = currentItem.categoryProduct
-                    carrinho["description"] = currentItem.descriptionProduct
-                    carrinho["id"] = currentItem.id
-                    carrinho["imageUrl"] = currentItem.imageViewProduct
-                    carrinho["name"] = currentItem.textViewProductName
-                    carrinho["price"] = currentItem.textViewProductPrice
-                    carrinho["pricebefore"] = currentItem.textViewProductPriceBefore
-                    carrinho["promotion"] = currentItem.promotion
-                    carrinho["quantidade"] = currentItem.quantidade + 1
-                    carrinho["stock"] = currentItem.stock
+                    if(it.isSuccessful){
+                        if(it.result?.exists() == true) {
+                            val quantidadeAtual = it.result!!.data?.get("quantidade").toString().toInt()
+                            //se ja existir este produto no carrinho
+                            val carrinho = HashMap<String, Any>()
+                            carrinho["category"] = currentItem.categoryProduct
+                            carrinho["description"] = currentItem.descriptionProduct
+                            carrinho["id"] = currentItem.id
+                            carrinho["imageUrl"] = currentItem.imageViewProduct
+                            carrinho["name"] = currentItem.textViewProductName
+                            carrinho["price"] = currentItem.textViewProductPrice
+                            carrinho["pricebefore"] = currentItem.textViewProductPriceBefore
+                            carrinho["promotion"] = currentItem.promotion
+                            carrinho["quantidade"] = quantidadeAtual + 1
+                            carrinho["stock"] = currentItem.stock
 
-                    authFireStore.collection(uid).document(currentItem.textViewProductName).set(carrinho).addOnCompleteListener { it1 ->
-                        when {
-                            it1.isSuccessful -> {
-                                Log.d("aaaa", "adicionado")
+                            authFireStore.collection(uid).document(currentItem.textViewProductName).set(carrinho).addOnCompleteListener { it1 ->
+                                when {
+                                    it1.isSuccessful -> {
+                                        Log.d("aaaa", "adicionado")
+                                    }
+                                    else -> {
+                                        Log.d("aaaa", "não adicionou")
+                                    }
+                                }
                             }
-                            else -> {
-                                Log.d("aaaa", "não adicionou")
+                        }  else {
+                            //se nao existir o produto no carrinho
+                            val carrinho = HashMap<String, Any>()
+                            carrinho["category"] = currentItem.categoryProduct
+                            carrinho["description"] = currentItem.descriptionProduct
+                            carrinho["id"] = currentItem.id
+                            carrinho["imageUrl"] = currentItem.imageViewProduct
+                            carrinho["name"] = currentItem.textViewProductName
+                            carrinho["price"] = currentItem.textViewProductPrice
+                            carrinho["pricebefore"] = currentItem.textViewProductPriceBefore
+                            carrinho["promotion"] = currentItem.promotion
+                            carrinho["quantidade"] = 1
+                            carrinho["stock"] = currentItem.stock
+
+                            authFireStore.collection(uid).document(currentItem.textViewProductName).set(carrinho).addOnCompleteListener { it1 ->
+                                when {
+                                    it1.isSuccessful -> {
+                                        Log.d("aaaa", "adicionado")
+                                    }
+                                    else -> {
+                                        Log.d("aaaa", "não adicionou")
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                .addOnFailureListener {
-                    //se nao existir o produto no carrinho
-                    val carrinho = HashMap<String, Any>()
-                    carrinho["category"] = currentItem.categoryProduct
-                    carrinho["description"] = currentItem.descriptionProduct
-                    carrinho["id"] = currentItem.id
-                    carrinho["imageUrl"] = currentItem.imageViewProduct
-                    carrinho["name"] = currentItem.textViewProductName
-                    carrinho["price"] = currentItem.textViewProductPrice
-                    carrinho["pricebefore"] = currentItem.textViewProductPriceBefore
-                    carrinho["promotion"] = currentItem.promotion
-                    carrinho["quantidade"] = 1
-                    carrinho["stock"] = currentItem.stock
-
-                    authFireStore.collection(uid).document(currentItem.textViewProductName).set(carrinho).addOnCompleteListener { it1 ->
-                        when {
-                            it1.isSuccessful -> {
-                                Log.d("aaaa", "adicionado")
-                            }
-                            else -> {
-                                Log.d("aaaa", "não adicionou")
-                            }
-                        }
-                    }
-                }
-
-
         }
     }
 

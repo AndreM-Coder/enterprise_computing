@@ -45,8 +45,8 @@ class cartFragment : Fragment() {
         return view
     }
 
-    private fun loadProductsCart(myCallback: (ArrayList<ProductCart>) -> Unit) {
-        val arrayCart = ArrayList<ProductCart>()
+    private fun loadProductsCart(myCallback: (ArrayList<Product>) -> Unit) {
+        val arrayCart = ArrayList<Product>()
 
         val uid = mAuth.uid.toString()
 
@@ -55,11 +55,16 @@ class cartFragment : Fragment() {
             .addOnCompleteListener {
                 if(it.isSuccessful) {
                     for(document in it.result!!) {
-                        val item = ProductCart(document.data.getValue(("id")).toString().toInt(),
+                        val item = Product(document.data.getValue(("id")).toString().toInt(),
                             document.data.getValue(("imageUrl")).toString(),
                             document.data.getValue(("name").toString()) as String,
                             document.getString(("price")) as String,
-                            document.data.getValue(("quantidade")).toString().toInt())
+                            document.getString(("pricebefore")) as String,
+                            document.getString(("category")) as String,
+                            document.getString(("description")) as String,
+                            document.data.getValue(("quantidade")).toString().toInt(),
+                            document.getString(("stock")) as String,
+                            document.getString(("promotion")) as String)
                         arrayCart.add(item)
                     }
                     myCallback(arrayCart)
