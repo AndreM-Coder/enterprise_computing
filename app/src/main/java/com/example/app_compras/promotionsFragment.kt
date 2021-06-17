@@ -53,7 +53,7 @@ class promotionsFragment : Fragment() {
                                 document.getString(("pricebefore")) as String,
                                 document.getString(("category")) as String,
                                 document.getString(("stock")) as String,
-                                document.getString(("quantidade")) as String,
+                                document.data.getValue(("quantidade")).toString().toInt(),
                                 document.getString(("promotion")) as String,
                                 document.getString(("description")) as String)
                             arrayProducts.add(item)

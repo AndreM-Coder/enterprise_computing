@@ -27,7 +27,7 @@ class CartAdapter(private val exampleList: ArrayList<ProductCart>) : RecyclerVie
             .into(holder.imageViewProduct)
         holder.textViewProductName.text = currentItem.textViewProductName
         holder.textViewProductPrice.text = (currentItem.textViewProductPrice + "€")
-        holder.textViewQuantityProductCart.text = currentItem.textViewQuantityProductCart
+        holder.textViewQuantityProductCart.text = currentItem.textViewQuantityProductCart.toString()
 
     }
 

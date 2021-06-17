@@ -59,7 +59,7 @@ class cartFragment : Fragment() {
                             document.data.getValue(("imageUrl")).toString(),
                             document.data.getValue(("name").toString()) as String,
                             document.getString(("price")) as String,
-                            document.getString(("quantidade")) as String)
+                            document.data.getValue(("quantidade")).toString().toInt())
                         arrayCart.add(item)
                     }
                     myCallback(arrayCart)

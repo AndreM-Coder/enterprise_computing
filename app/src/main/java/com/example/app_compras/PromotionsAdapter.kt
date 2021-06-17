@@ -59,29 +59,63 @@ class PromotionsAdapter (private val exampleList: List<Product>) : RecyclerView.
         }
 
         holder.buttonCart.setOnClickListener {
-            val carrinho = HashMap<String, Any>()
-            carrinho["category"] = currentItem.categoryProduct
-            carrinho["description"] = currentItem.descriptionProduct
-            carrinho["id"] = currentItem.id
-            carrinho["imageUrl"] = currentItem.imageViewProduct
-            carrinho["name"] = currentItem.textViewProductName
-            carrinho["price"] = currentItem.textViewProductPrice
-            carrinho["pricebefore"] = currentItem.textViewProductPriceBefore
-            carrinho["promotion"] = currentItem.promotion
-            carrinho["quantidade"] = currentItem.quantidade
-            carrinho["stock"] = currentItem.stock
 
             val uid = mAuth.uid.toString()
-            authFireStore.collection(uid).document(currentItem.textViewProductName).set(carrinho).addOnCompleteListener { it1 ->
-                when {
-                    it1.isSuccessful -> {
-                        Log.d("aaaa", "adicionado")
-                    }
-                    else -> {
-                        Log.d("aaaa", "não adicionou")
+
+            FirebaseFirestore.getInstance().collection(uid).document(currentItem.textViewProductName)
+                .get()
+                .addOnCompleteListener {
+                    //se ja existir este produto no carrinho
+                    val carrinho = HashMap<String, Any>()
+                    carrinho["category"] = currentItem.categoryProduct
+                    carrinho["description"] = currentItem.descriptionProduct
+                    carrinho["id"] = currentItem.id
+                    carrinho["imageUrl"] = currentItem.imageViewProduct
+                    carrinho["name"] = currentItem.textViewProductName
+                    carrinho["price"] = currentItem.textViewProductPrice
+                    carrinho["pricebefore"] = currentItem.textViewProductPriceBefore
+                    carrinho["promotion"] = currentItem.promotion
+                    carrinho["quantidade"] = currentItem.quantidade + 1
+                    carrinho["stock"] = currentItem.stock
+
+                    authFireStore.collection(uid).document(currentItem.textViewProductName).set(carrinho).addOnCompleteListener { it1 ->
+                        when {
+                            it1.isSuccessful -> {
+                                Log.d("aaaa", "adicionado")
+                            }
+                            else -> {
+                                Log.d("aaaa", "não adicionou")
+                            }
+                        }
                     }
                 }
-            }
+                .addOnFailureListener {
+                    //se nao existir o produto no carrinho
+                    val carrinho = HashMap<String, Any>()
+                    carrinho["category"] = currentItem.categoryProduct
+                    carrinho["description"] = currentItem.descriptionProduct
+                    carrinho["id"] = currentItem.id
+                    carrinho["imageUrl"] = currentItem.imageViewProduct
+                    carrinho["name"] = currentItem.textViewProductName
+                    carrinho["price"] = currentItem.textViewProductPrice
+                    carrinho["pricebefore"] = currentItem.textViewProductPriceBefore
+                    carrinho["promotion"] = currentItem.promotion
+                    carrinho["quantidade"] = 1
+                    carrinho["stock"] = currentItem.stock
+
+                    authFireStore.collection(uid).document(currentItem.textViewProductName).set(carrinho).addOnCompleteListener { it1 ->
+                        when {
+                            it1.isSuccessful -> {
+                                Log.d("aaaa", "adicionado")
+                            }
+                            else -> {
+                                Log.d("aaaa", "não adicionou")
+                            }
+                        }
+                    }
+                }
+
+
         }
     }
 
