@@ -1,55 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#088A4B"
     tools:context=".ProductFragment">
 
-    <TextView
-        android:id="@+id/textViewProductNameIndividual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bananas"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="200dp"/>
 
-    <TextView
-        android:id="@+id/textViewProductPriceIndividual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2,40€"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="150dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="0dp"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
-    <ImageView
-        android:id="@+id/imageViewProductImageIndividual"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"/>
 
-    <TextView
-        android:id="@+id/textViewProductDescriptionIndividual"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Descrição"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"/>
+        <ImageView
+            android:id="@+id/imageViewProductImageIndividual"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:layout_marginStart="59dp"
+            android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/botaoAddCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="50dp"
-        android:text="Add to cart" />
+        <TextView
+            android:id="@+id/textViewProductNameIndividual"
+            android:layout_width="317dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="-240dp"
+            android:layout_marginBottom="-20dp"
+            android:text="Bananas"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
+
+        <TextView
+            android:id="@+id/textViewProductPriceIndividual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="-185dp"
+            android:layout_marginBottom="-60dp"
+            android:text="2,40€"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewProductDescriptionIndividual"
+            android:layout_width="262dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="-150dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="-40dp"
+            android:text="Descrição"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/botaoAddCart"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="-50dp"
+            android:contentDescription="cartIcon"
+            android:src="@drawable/ic_cart_add"
+            android:background="#A0A2A3" />
+
+
+    </LinearLayout>
 
 </FrameLayout>
