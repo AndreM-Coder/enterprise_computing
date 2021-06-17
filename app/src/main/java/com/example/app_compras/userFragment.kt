@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_user.*
 
 class userFragment : Fragment() {
 
@@ -22,6 +20,7 @@ class userFragment : Fragment() {
     lateinit var emailLogin: EditText
     lateinit var passwordLogin: EditText
     lateinit var loginFragment: LoginFragment
+    lateinit var settingsFragment: SettingsFragment
 
     lateinit var currentid : String
 
@@ -29,7 +28,7 @@ class userFragment : Fragment() {
     lateinit var lastname: TextView
     lateinit var fullname: TextView
     lateinit var email: TextView
-
+    lateinit var settings_btn: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
@@ -41,11 +40,14 @@ class userFragment : Fragment() {
 
         loginFragment = LoginFragment()
         registerFragment = RegisterFragment()
+        settingsFragment = SettingsFragment()
 
         firstname = view.findViewById(R.id.firstname)
         lastname = view.findViewById(R.id.lastname)
         fullname = view.findViewById(R.id.fullname)
         email = view.findViewById(R.id.email)
+        settings_btn = view.findViewById(R.id.settings_btn)
+
 
         val user = auth.currentUser
 
@@ -77,6 +79,12 @@ class userFragment : Fragment() {
         lastname.setOnClickListener {
             Toast.makeText(activity, "Last Name Updated", Toast.LENGTH_LONG).show()
         }
+
+
+        settings_btn.setOnClickListener {
+            mudarFragment(settingsFragment)
+        }
+
 
         return view
 

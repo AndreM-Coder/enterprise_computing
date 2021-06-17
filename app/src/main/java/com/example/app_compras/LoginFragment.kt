@@ -21,6 +21,7 @@ class LoginFragment : Fragment() {
     lateinit var emailLogin: EditText
     lateinit var passwordLogin: EditText
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_login, container, false)
