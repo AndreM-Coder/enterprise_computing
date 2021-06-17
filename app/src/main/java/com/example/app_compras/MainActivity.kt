@@ -3,6 +3,7 @@ package com.example.app_compras
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var searchFragment: searchFragment
     lateinit var cartFragment: cartFragment
     lateinit var userFragment: userFragment
+    private var backPressedTime: Long = 0
 
 
     private lateinit var navController: NavController
@@ -82,5 +84,21 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.fl_wrapper, fragment)
             .commit()
+    }
+
+    override fun onBackPressed() {
+        when {
+            supportFragmentManager.backStackEntryCount > 0 -> {
+                supportFragmentManager.popBackStack()
+            }
+            backPressedTime + 2000 > System.currentTimeMillis() -> {
+                super.onBackPressed()
+                return
+            }
+            else -> {
+                Toast.makeText(this, "Prima BACK novamente para sair.", Toast.LENGTH_SHORT).show()
+            }
+        }
+        backPressedTime = System.currentTimeMillis()
     }
 }
