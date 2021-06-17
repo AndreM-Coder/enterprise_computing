@@ -57,7 +57,7 @@ class ProductFragment : Fragment() {
             .addOnSuccessListener {
                 if(it != null) {
                     textViewProductNameIndividual.text = it.getString(("name")).toString()
-                    textViewProductPriceIndividual.text = it.getString(("price"))
+                    textViewProductPriceIndividual.text = (it.getString(("price")) + "€")
                     Picasso.get()
                         .load(it.getString(("imageUrl")))
                         .into(imageViewProductImageIndividual)
