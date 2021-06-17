@@ -27,7 +27,8 @@ class ProductinPromotionAdapter (private val exampleList: List<ProductIndividual
             .into(holder.imageViewProductImageIndividual)
         holder.textViewProductNameIndividual.text = currentItem.textViewProductName
         holder.textViewProductPriceIndividual.text = currentItem.textViewProductPrice
-        holder.textViewProductDescriptionIndividual.text = currentItem.textviewDescription
+        holder.textViewProductDescriptionIndividual.text = (currentItem.textviewDescription + "€")
+        holder.textViewProductPriceBefore.text = (currentItem.textViewProductPriceBefore + "€")
         holder.textViewProductPriceBefore.paintFlags = holder.textViewProductPriceBefore.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
     }

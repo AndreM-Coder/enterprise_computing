@@ -37,7 +37,7 @@ class SearchAdapter1 (private val exampleList: List<Product>) : RecyclerView.Ada
             .load(currentItem.imageViewProduct)
             .into(holder.imageViewProduct)
         holder.textViewProductName.text = currentItem.textViewProductName
-        holder.textViewProductPrice.text = currentItem.textViewProductPrice
+        holder.textViewProductPrice.text = (currentItem.textViewProductPrice + "€")
 
         holder.itemView.setOnClickListener { view ->
             val bundle = Bundle().apply {
